@@ -1,0 +1,31 @@
+{
+  "name": "dating-app-feature",
+  "version": "1.0.0",
+  "description": "Feature voor een dating app van blok-tech",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./server/js/index.js",
+    "start-server": "nodemon ./server/js/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chelseadoeleman/dating-app-feature.git"
+  },
+  "keywords": [],
+  "author": "Chelsea Doeleman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chelseadoeleman/dating-app-feature/issues"
+  },
+  "homepage": "https://github.com/chelseadoeleman/dating-app-feature#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "camelcase": "^5.3.1",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
