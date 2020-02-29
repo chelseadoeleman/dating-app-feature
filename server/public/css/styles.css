@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    font-family: inherit;
+    line-height: inherit;
+    color: inherit;
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+html,
+body {
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 35px;
+    color: #000000;
+    background-color: #FFFFFF;
+    overflow-x: hidden;
+    font-size: 1em;
+}
+
+img,
+svg {
+    display: block;
+}
+
+button {
+    font-size: inherit;
+    cursor: pointer;
+    outline: 0;
+}
+
+p {
+    line-height: 1.75em;
+    font-size: 1em;
+}
+
+blockquote {
+    font-size: .75em;
+    font-weight: 900;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2.1875em;
+    margin: .5em 0;
+}
+
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3em;
+    margin: .5em 0;
+}
+
+h3 {
+    font-size: 1em;
+    font-weight: 900;
+}
+
+a {
+    text-decoration: none;
+    outline: 0;
+}
+
+footer {
+    margin: 0;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 20px;
+}
+
+nav ul li a {
+    color: #00a2ff;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: all .2s ease;
+}
+
+nav ul li a:hover,
+nav ul li a:focus,
+nav ul li a:active {
+    color: #66c7ff;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+form {
+    display: flex;
+    justify-content: space-between;
+}
+
+form label {
+    font-weight: 700;
+}
+
+form label input {
+    border: none;
+    border-bottom: 1px solid #ff7300;
+    margin: 0 2em;
+}
+
+form label input:focus {
+    border: none;
+    border-bottom: 1px solid #ffa45a;
+    margin: 0 2em;
+    outline: 0;
+}
+
+
+form button {
+    border: none;
+    border-radius: .5em;
+    background-color: #ff7300;
+    color: #FFFFFF;
+    font-weight: 700;
+    transition: all .2s ease;
+}
+
+form button:hover,
+form button:focus,
+form button:active {
+    background-color: #ffa45a;
+}
