@@ -1,10 +1,11 @@
+const slug = require('slug')
+
 const handleIndexRoute = (request, response) => {
     response.render('../views/index.ejs')
 }
 
 const handleAboutRoute = (request, response) => {
     const { name } = request.query
-    response.render('../views/about.ejs')
     console.log(name);
     try {
         response.status(200).render('../views/about.ejs', 
@@ -30,6 +31,7 @@ const handleErrorRoute = (request, response, next) => {
 
 const createName = (request, response) => {
     const { name } = request.body
+    slug(name)
 
     if(name) {
         response.status(304).redirect(`/about?name=${name}`);

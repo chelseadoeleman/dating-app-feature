@@ -21,11 +21,12 @@ app.use(express.static(path.join(__dirname, '../public')))
 app.set('view engine', 'ejs')
 app.set('views', `${__dirname}/views`)
 
+app.post('/createName', createName)
+
 app.get('/', handleIndexRoute)
 app.get('/about', handleAboutRoute)
 app.get('/contact', handleContactRoute)
 
-app.post('/createName', createName)
 app.use(handleErrorRoute)
 
 
