@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ('../components/head') %>
+</head>
+
+<body>
+    <main>
+        <h1>Enter your name</h1>
+        <form action="/login" name="name" method="POST" class="form-name">
+            <label for="name">
+                E-mail
+                <input id="name" type="text" name="name" placeholder="user@hotmail.com">
+            </label>
+            <label for="name">
+                Password
+                <input id="name" type="password" name="name">
+            </label>
+            <button type="submit">Submit name</button>
+        </form>
+    </main>
+    <%- include ('../components/footer') %>
+</body>
+
+</html>

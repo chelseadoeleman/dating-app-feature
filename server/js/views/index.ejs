@@ -2,35 +2,59 @@
 <html lang="en">
 
 <head>
-    <% include ../components/head %>
+    <%- include ('../components/head') %>
 </head>
 
 <body>
     <header>
         <nav>
-            <ul>
+            <ul class="menu-wrapper">
                 <li>
-                    <a href="/">Home</a>
+                    <a href="/profile">
+                        <span class="paw"></span>
+                    </a>
                 </li>
                 <li>
-                    <a href="/about">About</a>
+                    <button type="button">Filters</button>
                 </li>
                 <li>
-                    <a href="/contact">Contact</a>
+                    <a href="/matches">
+                        <span class="bone"></span>
+                    </a>
                 </li>
             </ul>
         </nav>
     </header>
     <main>
-        <h1>Enter your name</h1>
-        <form action="/createName" name="name" method="POST" class="form-name">
-            <label for="name">
-                Name
-                <input id="name" type="text" name="name" placeholder="Piet" required>
-            </label>
-            <button type="submit">Submit name</button>
-        </form>
+        <section class="dog-wrapper">
+            <article class="dog-container">
+                <a href="/detail" class="view-more">
+                    <div class="image-wrapper">
+                        <div class="image-cropper">
+                            <img src="../uploads/bobby.jpg" alt="bobby">
+                        </div>
+                    </div>
+                    <div class="content-intro">
+                        <h1>Bobby</h1>
+                        <p>
+                            <span class="pin"></span>
+                            Amsterdam
+                        </p>
+                    </div>
+                    <ul class="content-list">
+                        <li>3 Years old</li>
+                        <li>Curious, Energetic, Always hungry</li>
+                        <li>"Love the beach!"</li>
+                    </ul>
+                </a>
+                <form action="/setlike" method="post" class="button-wrapper">
+                    <button type="submit" value="dislike" class="dislike" name="likeButton"></button>
+                    <button type="submit" value="like" class="like" name="likeButton"></button>
+                </form>
+            </article>
+        </section>
     </main>
+    <%- include ('../components/footer') %>
 </body>
 
 </html>

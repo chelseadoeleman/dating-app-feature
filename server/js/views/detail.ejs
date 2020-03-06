@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ('../components/head') %>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="menu-wrapper">
+                <li>
+                    <a href="/profile">
+                        <span class="paw"></span>
+                    </a>
+                </li>
+                <li class="close-detail">
+                    <a href="/">
+                        <span class="close"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/matches">
+                        <span class="bone"></span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="dog-container">
+            <a href="/detail" class="view-more">
+                <div class="image-gallery">
+                    <div class="image-cropper">
+                        <img src="../uploads/bobby.jpg" alt="bobby">
+                    </div>
+                    <div class="image-cropper">
+                        <img src="../uploads/bobby2.jpg" alt="bobby">
+                    </div>
+                    <div class="image-cropper">
+                        <img src="../uploads/bobby3.jpg" alt="bobby">
+                    </div>
+                </div>
+                <div class="detail-content">
+                    <div class="detail-intro">
+                        <h1>Bobby</h1>
+                        <p>
+                            <span class="pin"></span>
+                            Amsterdam
+                        </p>
+                    </div>
+                    <ul class="detail-list">
+                        <li>3 Years old</li>
+                        <li>Curious, Energetic, Always hungry</li>
+                        <li class="bio">"Love the beach!"</li>
+                        <li>
+                            <span class="instagram"></span>
+                            @thelegendarybobby
+                        </li>
+                    </ul>
+                </div>
+                </div>
+            </a>
+            <form action="/setlike" method="post" class="button-wrapper">
+                <button type="submit" value="dislike" class="dislike" name="likeButton"></button>
+                <button type="submit" value="like" class="like" name="likeButton"></button>
+            </form>
+        </section>
+    </main>
+    <%- include ('../components/footer') %>
+</body>
+
+</html>

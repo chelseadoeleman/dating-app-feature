@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <% include ../components/head %>
+    <%- include ('../components/head') %>
 </head>
 
 <body>
@@ -25,7 +25,9 @@
         <% if(name) { %>
         <h1>About <%= name %></h1>
         <% } %>
+        <button id=js-remove data-id="" class=danger>Remove name</button>
     </main>
+    <%- include ('../components/footer') %>
 </body>
 
 </html>
