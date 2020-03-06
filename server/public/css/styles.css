@@ -1,3 +1,8 @@
+@import './fonts.css';
+@import './devtools.css';
+@import './home.css';
+@import './detail.css';
+
 * {
     margin: 0;
     font-family: inherit;
@@ -11,13 +16,13 @@ html {
     scroll-behavior: smooth;
 }
 
-html,
+html, 
 body {
     padding: 0;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Gotham-Book", Arial, Helvetica, sans-serif;
     line-height: 35px;
     color: #000000;
     background-color: #FFFFFF;
@@ -46,22 +51,23 @@ blockquote {
     font-weight: 900;
 }
 
-ul {
+ul{
     list-style: none;
     padding: 0;
 }
 
 h1 {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Noe Display", Arial, Helvetica, sans-serif;
     font-size: 2.1875em;
     margin: .5em 0;
 }
 
 h2 {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Gotham-Bold", Arial, Helvetica, sans-serif;
     font-size: 3em;
     margin: .5em 0;
 }
+
 
 h3 {
     font-size: 1em;
@@ -77,68 +83,3 @@ footer {
     margin: 0;
 }
 
-nav ul {
-    display: flex;
-    justify-content: center;
-}
-
-nav ul li {
-    margin: 20px;
-}
-
-nav ul li a {
-    color: #00a2ff;
-    text-transform: uppercase;
-    font-weight: 700;
-    transition: all .2s ease;
-}
-
-nav ul li a:hover,
-nav ul li a:focus,
-nav ul li a:active {
-    color: #66c7ff;
-}
-
-main {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-form {
-    display: flex;
-    justify-content: space-between;
-}
-
-form label {
-    font-weight: 700;
-}
-
-form label input {
-    border: none;
-    border-bottom: 1px solid #ff7300;
-    margin: 0 2em;
-}
-
-form label input:focus {
-    border: none;
-    border-bottom: 1px solid #ffa45a;
-    margin: 0 2em;
-    outline: 0;
-}
-
-
-form button {
-    border: none;
-    border-radius: .5em;
-    background-color: #ff7300;
-    color: #FFFFFF;
-    font-weight: 700;
-    transition: all .2s ease;
-}
-
-form button:hover,
-form button:focus,
-form button:active {
-    background-color: #ffa45a;
-}

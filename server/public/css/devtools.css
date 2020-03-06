@@ -1,0 +1,60 @@
+.dev-tools-item{
+	position: fixed;
+	z-index: 9999;
+	border-radius: 9px;
+	color: white;
+	font-size: 12px;
+	padding: 6px 13px;
+	bottom: 5px;
+	left: 5px;
+	display: none;
+}
+
+.break-xs{
+    background: #D0021B;
+    display: block;
+}
+
+@media screen and (min-width: 543px){
+    .break-xs{
+        display: none;
+    }
+
+    .break-sm{
+        background: #F5A623;
+        display: block;
+    }
+}
+
+@media screen and (min-width: 767px){
+    .break-sm{
+        display: none;
+    }
+
+    .break-md{
+        background: #F8BB1C;
+        display: block;
+    }
+}
+
+@media screen and (min-width: 991px){
+    .break-md{
+        display: none;
+    }
+
+    .break-lg{
+        background: #74B929;
+        display: block;
+    }
+}
+
+@media screen and (min-width: 1199px){
+    .break-lg{
+        display: none;
+    }
+
+    .break-xl{
+        background: #4A90E2;
+        display: block;
+    }
+}

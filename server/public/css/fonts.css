@@ -1,0 +1,17 @@
+@font-face {
+  font-family: "Noe Display";
+  src: url("../fonts/NoeDisplay-Bold.ttf") format("opentype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gotham-Book";
+  src: url("../fonts/Gotham-Book.ttf") format("opentype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gotham-Bold";
+  src: url("../fonts/Gotham-Bold.ttf") format("opentype");
+  font-display: swap;
+}
