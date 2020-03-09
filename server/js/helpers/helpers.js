@@ -16,12 +16,10 @@ const handleMatchesRoute = (request, response) => {
     response.render('../views/matches.ejs')
 }
 
-
 const handleProfileRoute = (request, response) => {
     response.render('../views/profile.ejs')
 }
-
-
+ 
 const handleErrorRoute = (request, response, next) => {
     response.status(404).render('../views/404.ejs')
 }
