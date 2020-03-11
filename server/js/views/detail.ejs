@@ -28,8 +28,8 @@
         </nav>
     </header>
     <main class="detail">
-        <section class="dog-container">
-            <a href="/detail" class="view-more">
+        <% if(data) { %>
+            <section class="dog-container">
                 <div class="image-gallery">
                     <div class="image-cropper">
                         <img src="../uploads/bobby.jpg" alt="bobby">
@@ -43,29 +43,29 @@
                 </div>
                 <div class="detail-content">
                     <div class="detail-intro">
-                        <h1>Bobby</h1>
+                        <h1><%= data.name %></h1>
                         <p>
                             <span class="pin"></span>
-                            Amsterdam
+                            <%= data.location %>
                         </p>
                     </div>
                     <ul class="detail-list">
-                        <li>3 Years old</li>
-                        <li>Curious, Energetic, Always hungry</li>
-                        <li class="bio">"Love the beach!"</li>
+                        <li><%= data.age %> Years old</li>
+                        <li><%= data.characteristics %></li>
+                        <li class="bio">"<%= data.bio %>"</li>
                         <li>
                             <span class="instagram"></span>
-                            @thelegendarybobby
+                            @<%= data.instagram %>
                         </li>
                     </ul>
                 </div>
                 </div>
-            </a>
-            <form action="/setlike" method="post" class="button-wrapper">
-                <button type="submit" value="dislike" class="dislike" name="likeButton"></button>
-                <button type="submit" value="like" class="like" name="likeButton"></button>
-            </form>
-        </section>
+                <form action="/setlike" method="post" class="button-wrapper">
+                    <button type="submit" value="dislike" class="dislike" name="likeButton"></button>
+                    <button type="submit" value="<%= dog._id %>" class="like" name="likeButton"></button>
+                </form>
+            </section>
+        <% } %>
     </main>
     <%- include ('../components/footer') %>
 </body>

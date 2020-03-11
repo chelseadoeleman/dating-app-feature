@@ -18,7 +18,21 @@ const handleLoginRoute = (request, response) => {
 }
 
 const handleDetailRoute = (request, response) => {
-    response.render('../views/detail.ejs')
+    const { id } = request.params
+    const done = (error, data) => {
+        if (error) {
+            next(error)
+        } else {
+            response.render('../views/detail.ejs',
+                (data) ? {
+                    data: data 
+                } :  {
+                    data: undefined
+                }
+            )
+        }
+    }
+    db.collection('dogs').findOne({_id: mongo.ObjectID(id)}, done)
 }
 
 const handleOverviewRoute = (request, response, next) => {
@@ -27,7 +41,13 @@ const handleOverviewRoute = (request, response, next) => {
         if (error) {
             next(error)
         } else {
-            response.render('../views/index.ejs', {data: data})
+            response.render('../views/index.ejs', 
+                (data) ? {
+                    data: data 
+                } :  {
+                    data: undefined
+                }
+            )
         }
     }
     db.collection('dogs').find().toArray(done)
@@ -42,47 +62,30 @@ const handleErrorRoute = (request, response, next) => {
 }
 
 const setLogin = (request, response) => {
-    response.status(304).redirect('/');
+    response.status(304).redirect('/')
 }
 
 const setLike = (request, response) => {
     const { likeButton } = request.body
     console.log(likeButton)
-    
-    response.status(304).redirect('/');
+
+    if(likeButton === 'dislike') {
+        // Remove from overview
+        response.status(304).redirect('/')
+    } else {
+        // Insert id into matches
+        const done = (error, data) => {
+            if (error) {
+                next(error)
+            } else {
+                response.status(304).redirect('/')
+            }
+        }
+        db.collection('dogs').insertOne({
+            matches: likeButton
+        }, done)
+    }
 }
-
-// const handleAboutRoute = (request, response) => {
-//     const { name } = request.query
-
-//     try {
-//         response.status(200).render('../views/about.ejs', 
-//             (name) ? {
-//                 name
-//             } : {
-//                 name: undefined
-//             }
-//         )
-
-//     } catch (error) {
-//         throw new Error(error)
-//     }
-// }
-
-
-// const createName = (request, response) => {
-//     const { name } = request.body
-//     slug(name)
-
-//     if(name) {
-//         response.status(304).redirect(`/about?name=${name}`);
-//     } else {
-//         console.log('please enter your name')
-//         response.status(409).redirect('/')
-//     }
-
-// }
-
 
 module.exports = {
     handleErrorRoute,

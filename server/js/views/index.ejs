@@ -26,33 +26,37 @@
         </nav>
     </header>
     <main>
-        <section class="dog-wrapper">
-            <article class="dog-container">
-                <a href="/detail" class="view-more">
-                    <div class="image-wrapper">
-                        <div class="image-cropper">
-                            <img src="../uploads/bobby.jpg" alt="bobby">
-                        </div>
-                    </div>
-                    <div class="content-intro">
-                        <h1>Bobby</h1>
-                        <p>
-                            <span class="pin"></span>
-                            Amsterdam
-                        </p>
-                    </div>
-                    <ul class="content-list">
-                        <li>3 Years old</li>
-                        <li>Curious, Energetic, Always hungry</li>
-                        <li>"Love the beach!"</li>
-                    </ul>
-                </a>
-                <form action="/setlike" method="post" class="button-wrapper">
-                    <button type="submit" value="dislike" class="dislike" name="likeButton"></button>
-                    <button type="submit" value="like" class="like" name="likeButton"></button>
-                </form>
-            </article>
-        </section>
+        <% if (data) { %>
+            <section class="dog-wrapper">
+                <% data.forEach(dog => { %> 
+                    <article class="dog-container">
+                        <a href="/<%= dog._id %>" class="view-more">
+                            <div class="image-wrapper">
+                                <div class="image-cropper">
+                                    <img src="../uploads/bobby.jpg" alt="bobby">
+                                </div>
+                            </div>
+                            <div class="content-intro">
+                                <h1><%= dog.name %></h1>
+                                <p>
+                                    <span class="pin"></span>
+                                    <%= dog.location %>
+                                </p>
+                            </div>
+                            <ul class="content-list">
+                                <li><%= dog.age %> Years old</li>
+                                <li><%= dog.characteristics %></li>
+                                <li>"<%= dog.bio %>"</li>
+                            </ul>
+                        </a>
+                        <form action="/setlike" method="post" class="button-wrapper">
+                            <button type="submit" value="dislike" class="dislike" name="likeButton"></button>
+                            <button type="submit" value="<%= dog._id %>" class="like" name="likeButton"></button>
+                        </form>
+                    </article>
+                <%  }) %>
+            </section>
+        <% } %>
     </main>
     <%- include ('../components/footer') %>
 </body>

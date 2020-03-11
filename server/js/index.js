@@ -26,7 +26,7 @@ app.post('/login', setLogin)
 app.post('/setLike', setLike)
 
 app.get('/', handleOverviewRoute)
-app.get('/detail', handleDetailRoute)
+app.get('/:id', handleDetailRoute)
 app.get('/login', handleLoginRoute)
 app.get('/matches', handleMatchesRoute)
 
