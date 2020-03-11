@@ -11,10 +11,9 @@ const {
     handleDetailRoute,
     handleLoginRoute,
     handleMatchesRoute,
-    handleProfileRoute,
     setLogin,
     setLike
-} = require('./helpers/helpers')
+} = require('./helpers/routes')
 const app = express()
 
 app.use(bodyParser.urlencoded({extended: true}))
@@ -30,12 +29,9 @@ app.get('/', handleOverviewRoute)
 app.get('/detail', handleDetailRoute)
 app.get('/login', handleLoginRoute)
 app.get('/matches', handleMatchesRoute)
-app.get('/profile', handleProfileRoute)
-
-// app.delete('/about:name', remove)
 
 app.use(handleErrorRoute)
-
+// app.delete('/about:name', remove)
 
 app.listen({ port: process.env.PORT || 8000 }), () => {
     console.log(`listening on port ${process.env.PORT || 5000}`)
