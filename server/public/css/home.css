@@ -162,8 +162,10 @@ main {
 }
 
 .dog-container .view-more {
+    padding-top: 10px;
     display: block;
     transition: all .2s ease;
+    overflow-x: hidden;
 }
 
 .dog-container .view-more:hover .image-wrapper {

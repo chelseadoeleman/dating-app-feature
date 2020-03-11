@@ -16,7 +16,7 @@ html {
     scroll-behavior: smooth;
 }
 
-html, 
+html,
 body {
     padding: 0;
 }
@@ -51,7 +51,7 @@ blockquote {
     font-weight: 900;
 }
 
-ul{
+ul {
     list-style: none;
     padding: 0;
 }
@@ -64,7 +64,7 @@ h1 {
 
 h2 {
     font-family: "Gotham-Bold", Arial, Helvetica, sans-serif;
-    font-size: 3em;
+    font-size: 1.5em;
     margin: .5em 0;
 }
 
@@ -82,4 +82,3 @@ a {
 footer {
     margin: 0;
 }
-
