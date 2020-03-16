@@ -132,7 +132,7 @@ main {
 }
 
 .dog-container .button-wrapper {
-    position: fixed;
+    /* position: fixed; */
     bottom: 20px;
     left: 0;
     right: 0;
