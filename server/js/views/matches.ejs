@@ -19,27 +19,24 @@
     </header>
     <main>
         <h1>Matches</h1>
-        <ul class="matches-container">
-            <li>
-                <div class="match-wrapper">
-                    <p>
-                        <strong>
-                            Name
-                        </strong>
-                    </p>
-                    <p>Last message</p>
-                </div>
-                <form action="#">
-                    <button type="button">let's walk together</button>
-                </form>
-            </li>
-        </ul>
-        <form action="#">
-            <label>
-                Edit
-                <input type="checkbox" name="remove-button" value="remove">
-            </label>
-        </form>
+        <% if(dogs) { %>
+            <ul class="matches-container">
+                <% dogs.forEach(dog => { %>
+                    <li>
+                        <div class="match-wrapper">
+                            <p>
+                                <strong>
+                                     <%= dog.name %>
+                                </strong>
+                            </p>                                
+                        </div>
+                        <form action="#">
+                            <button type="button">let's walk together</button>
+                        </form>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } %>
     </main>
     <%- include ('../components/footer') %>
 </body>

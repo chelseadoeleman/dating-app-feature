@@ -62,16 +62,33 @@ const handleMatchesRoute = (request, response, next) => {
         if(error) {
             next(error)
         } else {
-            // const matches = data.matches
-            // console.log('else statement')
-            // matches.forEach(match => {
-            //     console.log(match)
-            // })
-            response.render('../views/matches.ejs')
+            if(data) {
+                const matches = data.matches
+                const dogs = []
+                const done = (error, data) => {
+                    if (error) {
+                        next(error)
+                    } else {
+                        dogs.push(data)
+                        console.log(dogs)
+                        response.render('../views/matches.ejs', 
+                            (dogs) ? {
+                                dogs: dogs 
+                            } :  {
+                                dogs: undefined
+                            })
+                    }
+                }
+                matches.map(match => {
+                    db.collection('dogs').findOne({_id: mongo.ObjectID(match)}, done)
+                })
+            } else {
+                console.log('something went wrong');
+            }
         }
     }
     console.log(request.session.user._id)
-    db.collection('dogs').findOne({_id: mongo.ObjectID(request.session.user._id)}, getUserId)
+    db.collection('dogs').findOne({_id: mongo.ObjectID(`${request.session.user._id}`)}, getUserId)
 }
  
 const handleErrorRoute = (request, response, next) => {
@@ -100,7 +117,7 @@ const setLike = (request, response, next ) => {
                         response.status(304).redirect('/')
                     }
                 }
-                db.collection('dogs').updateOne({_id: data._id}, {$addToSet: { matches: likeButton }}, done, { upsert: true })
+                db.collection('dogs').updateOne({_id: data._id}, {$addToSet: { matches: likeButton }}, done)
             }
         }
     }
