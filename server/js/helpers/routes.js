@@ -3,6 +3,7 @@ const slug = require('slug')
 const mongo = require('mongodb')
 const url = `mongodb+srv://chelseadoeleman:${process.env.DB_PASS}@cluster0-f7p2u.mongodb.net/test?retryWrites=true&w=majority`
 let db = null
+const userId = process.env.USER_ID
 
 mongo.MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
     try {
@@ -36,11 +37,14 @@ const handleDetailRoute = (request, response) => {
 }
 
 const handleOverviewRoute = (request, response, next) => {
+    request.session.user = {_id: userId}
 
     const done = (error, data) => {
         if (error) {
             next(error)
-        } else {
+        } else {            
+            data.shift()
+
             response.render('../views/index.ejs', 
                 (data) ? {
                     data: data 
@@ -53,8 +57,21 @@ const handleOverviewRoute = (request, response, next) => {
     db.collection('dogs').find().toArray(done)
 }
 
-const handleMatchesRoute = (request, response) => {
-    response.render('../views/matches.ejs')
+const handleMatchesRoute = (request, response, next) => {
+    const getUserId = (error, data) => {
+        if(error) {
+            next(error)
+        } else {
+            const matches = data.matches
+            console.log('else statement')
+            matches.forEach(match => {
+                console.log(match)
+            })
+            response.render('../views/matches.ejs')
+        }
+    }
+    console.log(request.session.user._id)
+    db.collection('dogs').findOne({_id: mongo.ObjectID(request.session.user._id)}, getUserId)
 }
  
 const handleErrorRoute = (request, response, next) => {
@@ -65,26 +82,30 @@ const setLogin = (request, response) => {
     response.status(304).redirect('/')
 }
 
-const setLike = (request, response) => {
+const setLike = (request, response, next ) => {
     const { likeButton } = request.body
-    console.log(likeButton)
 
-    if(likeButton === 'dislike') {
-        // Remove from overview
-        response.status(304).redirect('/')
-    } else {
-        // Insert id into matches
-        const done = (error, data) => {
-            if (error) {
-                next(error)
-            } else {
+    const getId = (error, data) => {
+        if (error) {
+            next(error)
+        } else {
+            if(likeButton === 'dislike') {
+                data.shift()
                 response.status(304).redirect('/')
+            } else {
+                const done = (error, data) => {
+                    if (error) {
+                        next(error)
+                    } else {
+                        response.status(304).redirect('/')
+                    }
+                }
+                db.collection('dogs').updateOne({_id: data._id}, {$addToSet: { matches: likeButton }}, done)
             }
         }
-        db.collection('dogs').insertOne({
-            matches: likeButton
-        }, done)
     }
+    console.log(request.session.user._id)
+    db.collection('dogs').findOne({_id: mongo.ObjectID(request.session.user._id)}, getId)
 }
 
 module.exports = {
