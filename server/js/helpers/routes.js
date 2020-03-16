@@ -62,11 +62,11 @@ const handleMatchesRoute = (request, response, next) => {
         if(error) {
             next(error)
         } else {
-            const matches = data.matches
-            console.log('else statement')
-            matches.forEach(match => {
-                console.log(match)
-            })
+            // const matches = data.matches
+            // console.log('else statement')
+            // matches.forEach(match => {
+            //     console.log(match)
+            // })
             response.render('../views/matches.ejs')
         }
     }
