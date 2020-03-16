@@ -100,7 +100,7 @@ const setLike = (request, response, next ) => {
                         response.status(304).redirect('/')
                     }
                 }
-                db.collection('dogs').updateOne({_id: data._id}, {$addToSet: { matches: likeButton }}, done)
+                db.collection('dogs').updateOne({_id: data._id}, {$addToSet: { matches: likeButton }}, done, { upsert: true })
             }
         }
     }
