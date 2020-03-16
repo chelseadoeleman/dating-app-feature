@@ -1,5 +1,6 @@
 'use strict'
 
+require('dotenv').config()
 const bodyParser = require('body-parser')
 const express = require('express')
 const path = require('path')
@@ -40,5 +41,5 @@ app.get('/:id', handleDetailRoute)
 app.use(handleErrorRoute)
 
 app.listen({ port: process.env.PORT || 8000 }), () => {
-    console.log(`listening on port ${process.env.PORT || 5000}`)
+    console.log(`listening on port ${process.env.PORT || 8000}`)
 }
