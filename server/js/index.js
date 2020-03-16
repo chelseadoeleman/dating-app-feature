@@ -5,16 +5,23 @@ const express = require('express')
 const path = require('path')
 const _ = require('lodash')
 const cc = require('camelcase')
+const session = require('express-session')
 const { 
-    handleErrorRoute,
     handleOverviewRoute,
-    handleDetailRoute,
     handleLoginRoute,
     handleMatchesRoute,
     setLogin,
-    setLike
+    setLike,
+    handleDetailRoute,
+    handleErrorRoute
 } = require('./helpers/routes')
 const app = express()
+
+app.use(session({
+	resave: false,
+	saveUninitialized: true,
+	secret: process.env.SESSION_SECRET
+}))
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname, '../public')))
@@ -26,12 +33,11 @@ app.post('/login', setLogin)
 app.post('/setLike', setLike)
 
 app.get('/', handleOverviewRoute)
-app.get('/:id', handleDetailRoute)
 app.get('/login', handleLoginRoute)
 app.get('/matches', handleMatchesRoute)
+app.get('/:id', handleDetailRoute)
 
 app.use(handleErrorRoute)
-// app.delete('/about:name', remove)
 
 app.listen({ port: process.env.PORT || 8000 }), () => {
     console.log(`listening on port ${process.env.PORT || 5000}`)
