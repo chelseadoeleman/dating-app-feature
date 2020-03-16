@@ -1,4 +1,16 @@
-[{
+[
+{
+    "name": "Test",
+    "age": "1",
+    "location": "Amsterdam",
+    "characteristics": "Loving, Hyper, Loves sleeping",
+    "bio": "Love the beach!",
+    "instagram": "",
+    "measurements": "small",
+    "images": [],
+    "matches": []
+},
+{
     "name": "Bobby",
     "age": "3",
     "location": "Amsterdam",
@@ -26,7 +38,7 @@
     "location": "Utrecht",
     "characteristics": "Loving, Hyper, Loves sleeping",
     "bio": "Love the beach!",
-    "instagram": "",
+    "instagram": "lisathebear",
     "measurements": "large",
     "images": [],
     "matches": []
