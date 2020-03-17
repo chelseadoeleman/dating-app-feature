@@ -2,6 +2,8 @@
 @import './devtools.css';
 @import './home.css';
 @import './detail.css';
+@import './profile.css';
+@import './matches.css';
 
 * {
     margin: 0;
