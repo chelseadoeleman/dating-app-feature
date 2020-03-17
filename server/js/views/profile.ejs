@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ('../components/head') %>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="right">
+                <li>
+                    <a href="/">
+                        <span class="heart"></span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <% if(data) { %>
+            <h1>Profile of <%= data.name %></h1>
+            <% if (data.age == 1) { %>
+                <h2><%= data.age %> year old</h2>
+            <% } else { %>
+                <h2><%= data.age %> years old</h2>
+            <% } %>
+            <form action="/change" name="name" method="POST" class="form-name">
+                <label class="field">
+                    Change name
+                    <input id="name" type="text" name="name" placeholder="<%= data.name %>" required>
+                </label>
+                <label class="field">
+                    Change age
+                    <input id="name" type="number" name="age" placeholder="<%= data.age %>" required>
+                </label>
+                <button type="submit">Submit Changes</button>
+            </form>
+        <% } %>
+    </main>
+    <%- include ('../components/footer') %>
+</body>
+
+</html>

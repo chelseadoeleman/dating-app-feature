@@ -14,12 +14,9 @@ mongo.MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true 
     }
 })
 
-const handleLoginRoute = (request, response) => {
-    response.render('../views/login.ejs')
-}
-
 const handleDetailRoute = (request, response, next) => {
     const { id } = request.params
+
     const done = (error, data) => {
         if (error) {
             next(error)
@@ -38,6 +35,7 @@ const handleDetailRoute = (request, response, next) => {
 
 const handleOverviewRoute = (request, response, next) => {
     request.session.user = {_id: userId}
+
     const done = (error, data) => {
         if (error) {
             next(error)
@@ -53,53 +51,6 @@ const handleOverviewRoute = (request, response, next) => {
         }
     }
     db.collection('dogs').find().toArray(done)
-}
-
-const getMatches = (request, response, next) => {
-    if(request.session.user._id) {
-        const getUserId = (error, data) => {
-            if(error) {
-                next(error)
-            } else {
-                const matches = data.matches
-                request.session.user = {matches: matches}
-                response.status(304).redirect('/matches')
-            }
-        }
-        console.log(request.session.user._id)
-        db.collection('dogs').findOne({_id: mongo.ObjectID(request.session.user._id)}, getUserId)
-    } else {
-        request.session.error = {title: 'Creditentials required'}
-		response.status(401).redirect('/')
-    }
-}
-
-const handleMatchesRoute = (request, response, next) => {
-    const { matches } = request.session.user
-    const done = (error, data) => {
-        if (error) {
-            next(error)
-        } else {
-            const dogs = data
-            response.render('../views/matches.ejs', 
-                (dogs) ? {
-                    dogs: dogs 
-                } :  {
-                    dogs: undefined
-                })
-        }
-    }
-
-    const match = matches.map(dog => (mongo.ObjectID(dog)))
-    db.collection('dogs').find({_id: {$in: match}}).toArray(done)
-}
- 
-const handleErrorRoute = (request, response, next) => {
-    response.status(404).render('../views/404.ejs')
-}
-
-const setLogin = (request, response) => {
-    response.status(304).redirect('/')
 }
 
 const setLike = (request, response, next ) => {
@@ -132,13 +83,120 @@ const setLike = (request, response, next ) => {
     }
 }
 
+const getMatches = (request, response, next) => {
+    if(request.session.user._id) {
+        const getUserId = (error, data) => {
+            if(error) {
+                next(error)
+            } else {
+                const matches = data.matches
+                request.session.matches = {matches: matches}
+                response.status(304).redirect('/matches')
+            }
+        }
+        db.collection('dogs').findOne({_id: mongo.ObjectID(request.session.user._id)}, getUserId)
+    } else {
+        request.session.error = {title: 'Creditentials required'}
+		response.status(401).redirect('/')
+    }
+}
+
+const handleMatchesRoute = (request, response, next) => {
+    const { matches } = request.session.matches
+
+    const done = (error, data) => {
+        if (error) {
+            next(error)
+        } else {
+            const dogs = data
+            response.render('../views/matches.ejs', 
+                (dogs) ? {
+                    dogs: dogs 
+                } :  {
+                    dogs: undefined
+                })
+        }
+    }
+
+    const match = matches.map(dog => (mongo.ObjectID(dog)))
+    db.collection('dogs').find({_id: {$in: match}}).toArray(done)
+}
+
+const handleProfileRoute = (request, response, next) => {
+    console.log(request.session.user._id)
+
+    if(request.session.user._id) {
+        const getUserId = (error, data) => {
+            if(error) {
+                next(error)
+            } else {
+                response.render('../views/profile.ejs', 
+                    (data) ? {
+                        data: data 
+                    } :  {
+                        data: undefined
+                    }
+                )
+            }
+        }
+        db.collection('dogs').findOne({_id: mongo.ObjectID(request.session.user._id)}, getUserId)
+    } else {
+        request.session.error = {title: 'Creditentials required'}
+        response.status(401).redirect('/')
+    }
+}
+
+const changeProfile = (request, response, next) => {
+    const { name , age } = request.body 
+    console.log(name, age)
+    const change = (error, data) => {
+        if (error) {
+            next(error)
+        } else {
+            response.status(304).redirect('/profile')
+        }
+    }
+    db.collection('dogs').updateOne({_id: mongo.ObjectID(request.session.user._id)}, {$set: { name: name, age: age }}, change)
+}
+
+const removeMatch = (request, response, next) => {
+    const { remove } = request.body
+
+    if(request.session.user) {
+        const getId = (error, data) => {
+            if (error) {
+                next(error)
+            } else {
+                const removeItem = (error, data) => {
+                    if (error) {
+                        next(error)
+                    } else {
+                        response.status(304).redirect('/getMatches')
+                    }
+                }
+                db.collection('dogs').updateOne({_id: data._id}, {$pull: { matches: remove }}, removeItem)
+            }
+        }
+        db.collection('dogs').findOne({_id: mongo.ObjectID(request.session.user._id)}, getId)
+    } else {
+        request.session.error = {title: 'Creditentials required'}
+		response.status(401).redirect('/')
+    }
+
+}
+
+const handleErrorRoute = (request, response, next) => {
+    response.status(404).render('../views/404.ejs')
+}
+
 module.exports = {
     handleErrorRoute,
     handleOverviewRoute,
     handleDetailRoute,
-    handleLoginRoute,
+    handleProfileRoute,
     handleMatchesRoute,
-    setLogin,
     setLike,
-    getMatches
+    getMatches,
+    removeMatch,
+    changeProfile
 }

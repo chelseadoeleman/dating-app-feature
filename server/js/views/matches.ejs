@@ -9,10 +9,10 @@
 <body>
     <header>
         <nav>
-            <ul class="menu-wrapper">
+            <ul class="left">
                 <li>
                     <a href="/">
-                        <span class="bone"></span>
+                        <span class="heart"></span>
                     </a>
                 </li>
             </ul>
@@ -20,10 +20,18 @@
     </header>
     <main>
         <h1>Matches</h1>
+        <label class="toggle" for="toggle-remove">
+            <span class="edit"></span>
+            Remove matches
+        </label>
+        <input type="checkbox" name="toggle" id="toggle-remove">
         <% if(dogs) { %>
             <ul class="matches-container">
                 <% dogs.forEach(dog => { %>
                     <li>
+                        <form action="/removeMatch" method="post" class="remove">
+                            <button type="submit" name="remove" value="<%= dog._id %>">x</button>
+                        </form>
                         <div class="match-wrapper">
                             <p>
                                 <strong>
@@ -32,11 +40,14 @@
                             </p>                                
                         </div>
                         <form action="#">
-                            <button type="button">let's walk together</button>
+                            <button class="walk" type="button">let's walk together</button>
                         </form>
                     </li>
                 <% }) %>
             </ul>
+        <% } else { %>
+            <p>Go out and find matches!</p>
+            <a href="/">Let's swipe</a>
         <% } %>
     </main>
     <%- include ('../components/footer') %>
