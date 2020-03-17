@@ -57,38 +57,45 @@ const handleOverviewRoute = (request, response, next) => {
     db.collection('dogs').find().toArray(done)
 }
 
-const handleMatchesRoute = (request, response, next) => {
+const getMatches = (request, response, next) => {
     const getUserId = (error, data) => {
         if(error) {
             next(error)
         } else {
-            if(data) {
-                const matches = data.matches
-                const dogs = []
-                const done = (error, data) => {
-                    if (error) {
-                        next(error)
-                    } else {
-                        dogs.push(data)
-                        console.log(dogs)
-                        response.render('../views/matches.ejs', 
-                            (dogs) ? {
-                                dogs: dogs 
-                            } :  {
-                                dogs: undefined
-                            })
-                    }
-                }
-                matches.map(match => {
-                    db.collection('dogs').findOne({_id: mongo.ObjectID(match)}, done)
-                })
-            } else {
-                console.log('something went wrong');
-            }
+            const matches = data.matches
+            console.log(matches)
+            request.session.user = {matches: matches}
+            response.status(304).redirect('/matches')
         }
     }
     console.log(request.session.user._id)
     db.collection('dogs').findOne({_id: mongo.ObjectID(`${request.session.user._id}`)}, getUserId)
+}
+
+const handleMatchesRoute = (request, response, next) => {
+    const { matches } = request.session.user
+    console.log(matches)
+    // const dogs = []
+    const done = (error, data) => {
+        if (error) {
+            next(error)
+        } else {
+            const dogs = data
+            // dogs.push(data)
+            console.log(dogs)
+            response.render('../views/matches.ejs', 
+                (dogs) ? {
+                    dogs: dogs 
+                } :  {
+                    dogs: undefined
+                })
+        }
+    }
+
+    const match = matches.map(dog => (mongo.ObjectID(dog)))
+    console.log(match)
+    db.collection('dogs').find({_id: {$in: match}}).toArray(done)
+
 }
  
 const handleErrorRoute = (request, response, next) => {
@@ -132,5 +139,6 @@ module.exports = {
     handleLoginRoute,
     handleMatchesRoute,
     setLogin,
-    setLike
+    setLike,
+    getMatches
 }

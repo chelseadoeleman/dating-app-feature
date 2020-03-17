@@ -14,7 +14,8 @@ const {
     setLogin,
     setLike,
     handleDetailRoute,
-    handleErrorRoute
+    handleErrorRoute,
+    getMatches
 } = require('./helpers/routes')
 const app = express()
 
@@ -35,6 +36,7 @@ app.post('/setLike', setLike)
 
 app.get('/', handleOverviewRoute)
 app.get('/login', handleLoginRoute)
+app.get('/getMatches', getMatches)
 app.get('/matches', handleMatchesRoute)
 app.get('/:id', handleDetailRoute)
 
