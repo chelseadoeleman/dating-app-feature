@@ -55,15 +55,15 @@ When you have a match a page will be renderd with all your matches, so you can s
 
 ```json
 {
-    "name": String,
-    "age": Number,
-    "location": String,
-    "characteristics": String,
-    "bio": String,
-    "instagram": String,
-    "measurements": String,
-    "images": Array,
-    "matches": Array
+    "name": "String",
+    "age": "Number",
+    "location": "String",
+    "characteristics": "String",
+    "bio": "String",
+    "instagram": "String",
+    "measurements": "String",
+    "images": "Array",
+    "matches": "Array"
 }
 
 ```
@@ -71,16 +71,16 @@ When you have a match a page will be renderd with all your matches, so you can s
 
 ```json
 {
-    "name": String,
-    "age": Number,
-    "location": String,
-    "characteristics": String,
-    "bio": String,
-    "instagram": String,
-    "measurements": String,
-    "images": Array,
-    "matches": Array,
-    "unanswered": Array
+    "name": "String",
+    "age": "Number",
+    "location": "String",
+    "characteristics": "String",
+    "bio": "String",
+    "instagram": "String",
+    "measurements": "String",
+    "images": "Array",
+    "matches": "Array",
+    "unanswered": "Array"
 }
 
 ```
