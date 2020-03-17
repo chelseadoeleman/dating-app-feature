@@ -18,7 +18,11 @@
     "bio": "Love the beach!",
     "instagram": "thelegendarybobby",
     "measurements": "medium",
-    "images": [],
+    "images": [
+        "https://i.pinimg.com/originals/72/bf/82/72bf828cae95f4166d36d3e5af35b55d.jpg", 
+        "https://i.pinimg.com/474x/07/ac/4e/07ac4e8b941c5977ff64cb0fcb4e5618.jpg",
+        "https://i.pinimg.com/564x/4f/92/ad/4f92adcfc04a5d4cba8ee1acc398b086.jpg"
+    ],
     "matches": []
 },
 {
@@ -29,7 +33,10 @@
     "bio": "Love the beach!",
     "instagram": "smokey-123",
     "measurements": "small",
-    "images": [],
+    "images": [
+        "https://i.pinimg.com/564x/27/53/04/275304347fe6150663f45cb590382568.jpg", 
+        "https://i.pinimg.com/originals/49/88/08/4988088a51e1e290e0cff7a94aa0b3a9.jpg"
+    ],
     "matches": []
 },
 {
@@ -40,7 +47,55 @@
     "bio": "Love the beach!",
     "instagram": "lisathebear",
     "measurements": "large",
-    "images": [],
+    "images": [
+        "https://i.pinimg.com/564x/e5/7d/8f/e57d8f8a7b58ac88f68dab09910d0b00.jpg",
+        "https://i.pinimg.com/236x/c9/ae/37/c9ae379cac6caf7fb80a9ed6c6085541.jpg",
+        "https://i.pinimg.com/236x/e3/07/5d/e3075d0a7d6414b0a0094ae383c8a580.jpg"
+    ],
+    "matches": []
+},
+{
+    "name": "Ollie",
+    "age": "3",
+    "location": "Amsterdam",
+    "characteristics": "Curious, Energetic, Always hungry",
+    "bio": "Love the beach!",
+    "instagram": "thelegendaryollie",
+    "measurements": "medium",
+    "images": [
+        "https://i.pinimg.com/564x/18/b4/df/18b4df96f980f20abdb9445595ac5806.jpg",
+        "https://i.pinimg.com/564x/0e/c4/55/0ec4559e667fefea341c464c1c0ef784.jpg"
+    ],
+    "matches": []
+},
+{
+    "name": "Oreo",
+    "age": "2",
+    "location": "Haarlem",
+    "characteristics": "Playful, Wild, Sweetheart",
+    "bio": "Love the beach!",
+    "instagram": "oreo-123",
+    "measurements": "small",
+    "images": [
+        "https://i.pinimg.com/564x/5f/d3/64/5fd36449ca36816d87dc4313c31213c3.jpg",
+        "https://i.pinimg.com/564x/87/4f/19/874f19df9fd41cee4b179ae41c85e822.jpg",
+        "https://i.pinimg.com/564x/b3/46/69/b34669bb9fc0c6688618d1f7f3037c03.jpg"
+    ],
+    "matches": []
+},
+{
+    "name": "Gizmo",
+    "age": "5",
+    "location": "Utrecht",
+    "characteristics": "Loving, Hyper, Loves sleeping",
+    "bio": "Love the beach!",
+    "instagram": "gizmothebear",
+    "measurements": "large",
+    "images": [
+        "https://i.pinimg.com/564x/35/35/7d/35357d80dd061db2629e5a6110e10264.jpg",
+        "https://i.pinimg.com/564x/ac/7a/05/ac7a05d93cfdabb1c32beedb58ee3242.jpg",
+        "https://i.pinimg.com/564x/87/60/36/876036e0345baa82d8dc3311edd2c124.jpg"
+    ],
     "matches": []
 }
 ]
