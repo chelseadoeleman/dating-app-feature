@@ -8,7 +8,7 @@ const userId = process.env.USER_ID
 mongo.MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
     try {
         db = client.db(process.env.DB_NAME)
-        console.log('connected..')
+        console.log(`Running on port ${process.env.PORT} connected to databse..`)
     } catch (error) {
         throw new Error(error)
     }
@@ -18,7 +18,7 @@ const handleLoginRoute = (request, response) => {
     response.render('../views/login.ejs')
 }
 
-const handleDetailRoute = (request, response) => {
+const handleDetailRoute = (request, response, next) => {
     const { id } = request.params
     const done = (error, data) => {
         if (error) {
@@ -63,26 +63,20 @@ const getMatches = (request, response, next) => {
             next(error)
         } else {
             const matches = data.matches
-            console.log(matches)
             request.session.user = {matches: matches}
             response.status(304).redirect('/matches')
         }
     }
-    console.log(request.session.user._id)
-    db.collection('dogs').findOne({_id: mongo.ObjectID(`${request.session.user._id}`)}, getUserId)
+    db.collection('dogs').findOne({_id: mongo.ObjectID(request.session.user._id)}, getUserId)
 }
 
 const handleMatchesRoute = (request, response, next) => {
     const { matches } = request.session.user
-    console.log(matches)
-    // const dogs = []
     const done = (error, data) => {
         if (error) {
             next(error)
         } else {
             const dogs = data
-            // dogs.push(data)
-            console.log(dogs)
             response.render('../views/matches.ejs', 
                 (dogs) ? {
                     dogs: dogs 
@@ -93,7 +87,6 @@ const handleMatchesRoute = (request, response, next) => {
     }
 
     const match = matches.map(dog => (mongo.ObjectID(dog)))
-    console.log(match)
     db.collection('dogs').find({_id: {$in: match}}).toArray(done)
 
 }
@@ -128,7 +121,6 @@ const setLike = (request, response, next ) => {
             }
         }
     }
-    console.log(request.session.user._id)
     db.collection('dogs').findOne({_id: mongo.ObjectID(request.session.user._id)}, getId)
 }
 
