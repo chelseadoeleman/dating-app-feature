@@ -9,13 +9,14 @@ const cc = require('camelcase')
 const session = require('express-session')
 const { 
     handleOverviewRoute,
-    handleLoginRoute,
     handleMatchesRoute,
-    setLogin,
+    changeProfile,
     setLike,
     handleDetailRoute,
     handleErrorRoute,
-    getMatches
+    handleProfileRoute,
+    getMatches,
+    removeMatch
 } = require('./helpers/routes')
 const app = express()
 
@@ -31,11 +32,12 @@ app.use(express.static(path.join(__dirname, '../public')))
 app.set('view engine', 'ejs')
 app.set('views', `${__dirname}/views`)
 
-app.post('/login', setLogin)
+app.post('/change', changeProfile)
 app.post('/setLike', setLike)
+app.post('/removeMatch', removeMatch)
 
 app.get('/', handleOverviewRoute)
-app.get('/login', handleLoginRoute)
+app.get('/profile', handleProfileRoute)
 app.get('/getMatches', getMatches)
 app.get('/matches', handleMatchesRoute)
 app.get('/:id', handleDetailRoute)
