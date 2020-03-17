@@ -11,7 +11,7 @@
         <nav>
             <ul class="menu-wrapper">
                 <li>
-                    <a href="#">
+                    <a href="/profile">
                         <span class="paw"></span>
                     </a>
                 </li>
@@ -34,7 +34,7 @@
                         <a href="/<%= dog._id %>" class="view-more">
                             <div class="image-wrapper">
                                 <div class="image-cropper">
-                                    <img src="../uploads/bobby.jpg" alt="bobby">
+                                    <img src="<%= dog.images[0] %>" alt="bobby">
                                 </div>
                             </div>
                             <div class="content-intro">
@@ -45,7 +45,11 @@
                                 </p>
                             </div>
                             <ul class="content-list">
-                                <li><%= dog.age %> Years old</li>
+                                <% if (dog.age == 1) { %>
+                                    <li><%= dog.age %> Year old</li>
+                                <% } else { %>
+                                    <li><%= dog.age %> Years old</li>
+                                <% } %>
                                 <li><%= dog.characteristics %></li>
                                 <li>"<%= dog.bio %>"</li>
                             </ul>

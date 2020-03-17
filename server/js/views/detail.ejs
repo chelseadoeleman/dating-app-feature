@@ -32,15 +32,11 @@
         <% if(data) { %>
             <section class="dog-container">
                 <div class="image-gallery">
+                    <% data.images.forEach(image => { %>
                     <div class="image-cropper">
-                        <img src="../uploads/bobby.jpg" alt="bobby">
+                        <img src="<%= image %>" alt="bobby">
                     </div>
-                    <div class="image-cropper">
-                        <img src="../uploads/bobby2.jpg" alt="bobby">
-                    </div>
-                    <div class="image-cropper">
-                        <img src="../uploads/bobby3.jpg" alt="bobby">
-                    </div>
+                    <% }) %>
                 </div>
                 <div class="detail-content">
                     <div class="detail-intro">
