@@ -1,5 +1,5 @@
 # dating-app-feature
-**Feature voor een dating app van blok-tech**
+**Feature for a dating application. The main learning goal for this project is rendering your code server-side with node and express. Where data will be stored/retrieved in a NoSQL database (MonogDB) and renderd with an templating engine.**
 
 ![Application](./docs/littls.png)
 > Home page where are the profiles will be shown.
@@ -8,6 +8,7 @@
 * **[How to install](#how-to-install)**
 * **[Concept](#concept)**
 * **[Data model](#data-model)**
+* **[Process](#process)**
 * **[Resources](#resources)**
 * **[Credits](#credits)**
 * **[License](#license)**
@@ -86,6 +87,17 @@ When you have a match a page will be renderd with all your matches, so you can s
 ```
 
 > This is kinda how the data model looks should look when you are able to log in. The people you like will be stored in unanswered, until they like or dislike you back. In case of a dislike, their Id will be removed. In case of a like their Id will be stored in matches.
+
+
+## Proces
+I started off with creating a Job Story specificaly for a dating application. Then I created a simple styleguide and some simple designs. 
+
+For **backend** specifically I started off, by creating a data model to get a gist of how the application should work and what data I needed. Then I roughly sketched out the functions and their functions. During this period I had already build my server with Express and used EJS as an templating engine. 
+
+Then came the hardest part which was setting up the database and connecting it to my application. Luckily this went quite alright, however rendering queries to the database and storing and retrieving data was a whole 'nother story. Luckily the internet was very helpful in this case. 
+> Still having a minor problem where the server logs: ```Error: Argument passed in must be a single String of 12 bytes or a string of 24 hex characters``` While I do realise the problem it's hard to tell where it's comming from and how to fix it. Apparantly ObjectID(id) is not in the right format, however after multiple logs I still do not find an issue. 
+
+In express-session I stored a fake userId to create a 'logged in account' without having to actualy login. Here all the matches are stored. I also stored the matches to render in ```/matches```, because these can't be viewed, when the user is not logged in. However they are properly stored in the database.
 
 ## Resources
 **Packages**
