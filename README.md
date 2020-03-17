@@ -88,6 +88,19 @@ When you have a match a page will be renderd with all your matches, so you can s
 > This is kinda how the data model looks should look when you are able to log in. The people you like will be stored in unanswered, until they like or dislike you back. In case of a dislike, their Id will be removed. In case of a like their Id will be stored in matches.
 
 ## Resources
+**Packages**
+* [Node JS](https://nodejs.org/en/)
+* [Express](https://expressjs.com/)
+* [Express session](https://www.npmjs.com/package/express-session)
+* [Ejs](https://ejs.co/)
+* [Bodyparser](https://www.npmjs.com/package/body-parser)
+* [Slug](https://www.npmjs.com/package/slug)
+* [Dotenv](https://www.npmjs.com/package/dotenv)
+* [MongoDB](https://www.mongodb.com/)
+* [Nodemon](https://nodemon.io/)
+
+**Other resources**
+* [Update an Array](https://docs.mongodb.com/manual/reference/operator/update-array/)
 
 ## Credits
 
