@@ -42,6 +42,16 @@ or if you're using nodemon
 npm run start-server
 ```
 
+NOTE 
+Make sure to fill in everything in your .env file. For an example of what it should look like go to [.env_sample](.env_sample) and change the filename to **.env**
+```
+PORT=8000
+DB_NAME=DB_NAME
+DB_PASS=DB_PASS
+SESSION_SECRET=SESSION_SECRET
+USER_ID=USER_ID
+```
+
 ## Concept
 
 **Job Story**
