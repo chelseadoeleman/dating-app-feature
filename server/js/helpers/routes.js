@@ -38,16 +38,14 @@ const handleDetailRoute = (request, response, next) => {
 
 const handleOverviewRoute = (request, response, next) => {
     request.session.user = {_id: userId}
-
     const done = (error, data) => {
         if (error) {
             next(error)
         } else {            
             data.shift()
-
             response.render('../views/index.ejs', 
                 (data) ? {
-                    data: data 
+                    data: data
                 } :  {
                     data: undefined
                 }
@@ -58,16 +56,22 @@ const handleOverviewRoute = (request, response, next) => {
 }
 
 const getMatches = (request, response, next) => {
-    const getUserId = (error, data) => {
-        if(error) {
-            next(error)
-        } else {
-            const matches = data.matches
-            request.session.user = {matches: matches}
-            response.status(304).redirect('/matches')
+    if(request.session.user._id) {
+        const getUserId = (error, data) => {
+            if(error) {
+                next(error)
+            } else {
+                const matches = data.matches
+                request.session.user = {matches: matches}
+                response.status(304).redirect('/matches')
+            }
         }
+        console.log(request.session.user._id)
+        db.collection('dogs').findOne({_id: mongo.ObjectID(request.session.user._id)}, getUserId)
+    } else {
+        request.session.error = {title: 'Creditentials required'}
+		response.status(401).redirect('/')
     }
-    db.collection('dogs').findOne({_id: mongo.ObjectID(request.session.user._id)}, getUserId)
 }
 
 const handleMatchesRoute = (request, response, next) => {
@@ -88,7 +92,6 @@ const handleMatchesRoute = (request, response, next) => {
 
     const match = matches.map(dog => (mongo.ObjectID(dog)))
     db.collection('dogs').find({_id: {$in: match}}).toArray(done)
-
 }
  
 const handleErrorRoute = (request, response, next) => {
@@ -102,26 +105,31 @@ const setLogin = (request, response) => {
 const setLike = (request, response, next ) => {
     const { likeButton } = request.body
 
-    const getId = (error, data) => {
-        if (error) {
-            next(error)
-        } else {
-            if(likeButton === 'dislike') {
-                data.shift()
-                response.status(304).redirect('/')
+    if(request.session.user) {
+        const getId = (error, data) => {
+            if (error) {
+                next(error)
             } else {
-                const done = (error, data) => {
-                    if (error) {
-                        next(error)
-                    } else {
-                        response.status(304).redirect('/')
+                if(likeButton === 'dislike') {
+                    data.shift()
+                    response.status(304).redirect('/')
+                } else {
+                    const done = (error, data) => {
+                        if (error) {
+                            next(error)
+                        } else {
+                            response.status(304).redirect('/')
+                        }
                     }
+                    db.collection('dogs').updateOne({_id: data._id}, {$addToSet: { matches: likeButton }}, done)
                 }
-                db.collection('dogs').updateOne({_id: data._id}, {$addToSet: { matches: likeButton }}, done)
             }
         }
+        db.collection('dogs').findOne({_id: mongo.ObjectID(request.session.user._id)}, getId)
+    } else {
+        request.session.error = {title: 'Creditentials required'}
+		response.status(401).redirect('/')
     }
-    db.collection('dogs').findOne({_id: mongo.ObjectID(request.session.user._id)}, getId)
 }
 
 module.exports = {
