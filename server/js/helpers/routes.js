@@ -5,6 +5,7 @@ const url = `mongodb+srv://chelseadoeleman:${process.env.DB_PASS}@cluster0-f7p2u
 let db = null
 const userId = process.env.USER_ID
 
+// Establish connection to the database
 mongo.MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
     try {
         db = client.db(process.env.DB_NAME)
@@ -14,6 +15,7 @@ mongo.MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true 
     }
 })
 
+// Get Id from params and look up in de database to render the right profile
 const handleDetailRoute = (request, response, next) => {
     const { id } = request.params
 
@@ -33,6 +35,7 @@ const handleDetailRoute = (request, response, next) => {
     db.collection('dogs').findOne({_id: mongo.ObjectID(id)}, done)
 }
 
+// Set user session and render everyone from the database
 const handleOverviewRoute = (request, response, next) => {
     request.session.user = {_id: userId}
 
@@ -53,6 +56,7 @@ const handleOverviewRoute = (request, response, next) => {
     db.collection('dogs').find().toArray(done)
 }
 
+// Update id to database in matches, where all the matches are saved
 const setLike = (request, response, next ) => {
     const { likeButton } = request.body
 
@@ -83,6 +87,7 @@ const setLike = (request, response, next ) => {
     }
 }
 
+// Find all the matches id's in matches
 const getMatches = (request, response, next) => {
     if(request.session.user._id) {
         const getUserId = (error, data) => {
@@ -101,6 +106,7 @@ const getMatches = (request, response, next) => {
     }
 }
 
+// Render user information of the matches
 const handleMatchesRoute = (request, response, next) => {
     const { matches } = request.session.matches
 
@@ -122,8 +128,8 @@ const handleMatchesRoute = (request, response, next) => {
     db.collection('dogs').find({_id: {$in: match}}).toArray(done)
 }
 
+// Get profile page from the logged in user
 const handleProfileRoute = (request, response, next) => {
-    console.log(request.session.user._id)
 
     if(request.session.user._id) {
         const getUserId = (error, data) => {
@@ -146,6 +152,7 @@ const handleProfileRoute = (request, response, next) => {
     }
 }
 
+// Update profile
 const changeProfile = (request, response, next) => {
     const { name , age } = request.body
     slug(name, age)
@@ -159,6 +166,7 @@ const changeProfile = (request, response, next) => {
     db.collection('dogs').updateOne({_id: mongo.ObjectID(request.session.user._id)}, {$set: { name: name, age: age }}, change)
 }
 
+// Fetch user id to remove matches in matches array
 const removeMatch = (request, response, next) => {
     const { remove } = request.body
 
