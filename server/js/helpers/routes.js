@@ -147,8 +147,8 @@ const handleProfileRoute = (request, response, next) => {
 }
 
 const changeProfile = (request, response, next) => {
-    const { name , age } = request.body 
-    console.log(name, age)
+    const { name , age } = request.body
+    slug(name, age)
     const change = (error, data) => {
         if (error) {
             next(error)
