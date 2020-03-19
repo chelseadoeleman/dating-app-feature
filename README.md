@@ -1,4 +1,4 @@
-# dating-app-feature
+# Littls a dating-app-feature
 **Feature for a dating application. The main learning goal for this project is rendering your code server-side with node and express. Where data will be stored/retrieved in a NoSQL database (MonogDB) and renderd with an templating engine.**
 
 ![Application](./docs/littls.png)
