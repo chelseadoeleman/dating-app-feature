@@ -4,6 +4,7 @@
 }
 
 .menu-wrapper li button {
+    background-color: #FF414D;
     width: 140px;
     height: 35px;
     display: flex;
